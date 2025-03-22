@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import EmptyPage from "components/commons/EmptyPage";
 import { useFetchMovies } from "hooks/reactQuery/useMoviesApi";
+import useDebounce from "hooks/useDebounce";
 import { Search } from "neetoicons";
 import { Input } from "neetoui";
 import { isEmpty } from "ramda";
@@ -11,8 +12,9 @@ import MovieList from "./MovieList";
 const MoviePage = () => {
   const [searchText, setSearchText] = useState("");
 
-  const searchParams = { s: searchText };
+  const debouncedSearchKey = useDebounce(searchText);
 
+  const searchParams = { s: debouncedSearchKey };
   const { data: { Search: movies = [] } = {} } = useFetchMovies(searchParams);
   console.log(movies);
 
