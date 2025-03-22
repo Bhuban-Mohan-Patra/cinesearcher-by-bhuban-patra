@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
+import EmptyPage from "components/commons/EmptyPage";
 import { useFetchMovies } from "hooks/reactQuery/useMoviesApi";
 import { Search } from "neetoicons";
 import { Input } from "neetoui";
+import { isEmpty } from "ramda";
 
 import MovieList from "./MovieList";
 
@@ -27,7 +29,7 @@ const MoviePage = () => {
         />
       </div>
       <div>
-        <MovieList movies={movies} />
+        {isEmpty(searchText) ? <EmptyPage /> : <MovieList movies={movies} />}
       </div>
     </div>
   );
