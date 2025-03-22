@@ -4,6 +4,8 @@ import { useFetchMovies } from "hooks/reactQuery/useMoviesApi";
 import { Search } from "neetoicons";
 import { Input } from "neetoui";
 
+import MovieList from "./MovieList";
+
 const MoviePage = () => {
   const [searchText, setSearchText] = useState("");
 
@@ -13,7 +15,7 @@ const MoviePage = () => {
   console.log(movies);
 
   return (
-    <div className="bg-red-100 p-6">
+    <div className="p-6">
       <div className="mx-auto mb-8 max-w-2xl">
         <Input
           className="rounded-lg border border-[#ddd]"
@@ -24,7 +26,9 @@ const MoviePage = () => {
           onChange={e => setSearchText(e.target.value)}
         />
       </div>
-      <div>{JSON.stringify(movies)}</div>
+      <div>
+        <MovieList movies={movies} />
+      </div>
     </div>
   );
 };
