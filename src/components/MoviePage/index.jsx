@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import EmptyPage from "components/commons/EmptyPage";
+import PageLoader from "components/commons/PageLoader";
 import { useFetchMovies } from "hooks/reactQuery/useMoviesApi";
 import useDebounce from "hooks/useDebounce";
 import { Search } from "neetoicons";
@@ -15,8 +16,10 @@ const MoviePage = () => {
   const debouncedSearchKey = useDebounce(searchText);
 
   const searchParams = { s: debouncedSearchKey };
-  const { data: { Search: movies = [] } = {} } = useFetchMovies(searchParams);
-  console.log(movies);
+  const { data: { Search: movies = [] } = {}, isLoading } =
+    useFetchMovies(searchParams);
+
+  if (isLoading) return <PageLoader />;
 
   return (
     <div className="p-6">
