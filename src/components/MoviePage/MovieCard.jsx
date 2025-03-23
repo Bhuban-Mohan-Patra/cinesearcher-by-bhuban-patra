@@ -22,7 +22,7 @@ const MovieCard = ({ movie }) => {
 
   return (
     <div className="m-5 overflow-hidden rounded-lg border border-gray-200  bg-white shadow-md transition-all duration-200 hover:shadow-lg">
-      <div className="aspect-[2/3] w-full px-16">
+      <div className="aspect-[2/3] w-full px-8">
         <img
           alt={title}
           className="h-full w-full object-cover"
