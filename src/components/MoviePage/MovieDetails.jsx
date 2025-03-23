@@ -22,6 +22,7 @@ const MovieDetails = ({ id, isOpen, onClose }) => {
     Rated: rated,
   } = movie;
 
+  console.log(title, poster);
   const genres = genre ? genre.split(", ") : [];
 
   const imageUrl = setDefaultImage(poster);
