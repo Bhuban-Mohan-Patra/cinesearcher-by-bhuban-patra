@@ -1,6 +1,7 @@
 import { useShowMovies } from "hooks/reactQuery/useMoviesApi";
 import { Modal, Spinner, Tag, Typography } from "neetoui";
 import { isEmpty } from "ramda";
+import { setDefaultImage } from "utils/setDefaultImage";
 
 const MovieDetails = ({ id, isOpen, onClose }) => {
   const { Header, Body } = Modal;
@@ -22,6 +23,8 @@ const MovieDetails = ({ id, isOpen, onClose }) => {
   } = movie;
 
   const genres = genre ? genre.split(", ") : [];
+
+  const imageUrl = setDefaultImage(poster);
 
   const movieDetails = [
     { label: "Director", value: director },
@@ -55,7 +58,7 @@ const MovieDetails = ({ id, isOpen, onClose }) => {
               <img
                 alt={title}
                 className="neeto-ui-rounded-lg object-contain"
-                src={poster}
+                src={imageUrl}
               />
             </div>
             <div className="ml-10 w-2/3 space-y-4 p-4">
