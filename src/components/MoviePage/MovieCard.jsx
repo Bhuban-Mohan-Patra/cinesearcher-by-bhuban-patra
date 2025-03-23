@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Typography } from "neetoui";
+import { setDefaultImage } from "utils/setDefaultImage";
 
 import MovieDetails from "./MovieDetails";
 
@@ -15,10 +16,7 @@ const MovieCard = ({ movie }) => {
     imdbID: movieID,
   } = movie;
 
-  const imageUrl =
-    poster === "N/A"
-      ? "https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png"
-      : poster;
+  const imageUrl = setDefaultImage(poster);
 
   return (
     <div className="m-5 overflow-hidden rounded-lg border border-gray-200  bg-white shadow-md transition-all duration-200 hover:shadow-lg">
