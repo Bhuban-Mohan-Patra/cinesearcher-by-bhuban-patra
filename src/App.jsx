@@ -1,18 +1,14 @@
 // eslint-disable-next-line import/extensions
-import ViewHistory from "components/MovieHistory";
-import MoviePage from "components/MoviePage";
+import { Route, Switch } from "react-router-dom";
 
 import "./App.css";
+import Home from "./components/Home";
+import routes from "./routes";
 
 const App = () => (
-  <div className="App grid grid-cols-4">
-    <div className="col-span-3">
-      <MoviePage />
-    </div>
-    <div className="col-span-1 mx-4 my-10 flex justify-center">
-      <ViewHistory />
-    </div>
-  </div>
+  <Switch>
+    <Route exact component={Home} path={routes.root} />
+  </Switch>
 );
 
 export default App;

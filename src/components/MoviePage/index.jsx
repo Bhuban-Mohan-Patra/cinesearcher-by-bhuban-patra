@@ -3,22 +3,45 @@ import React, { useState, useRef, useEffect } from "react";
 import EmptyPage from "components/commons/EmptyPage";
 import PageLoader from "components/commons/PageLoader";
 import { useFetchMovies } from "hooks/reactQuery/useMoviesApi";
-import useDebounce from "hooks/useDebounce";
+import useFuncDebounce from "hooks/useFuncDebounce";
+import useQueryParams from "hooks/useQueryParams";
+import { filterNonNull } from "neetocist";
 import { Search } from "neetoicons";
-import { Input, Kbd } from "neetoui";
-import { isEmpty } from "ramda";
+import { Input, Kbd, Pagination } from "neetoui";
+import { isEmpty, mergeLeft } from "ramda";
+import { useHistory } from "react-router-dom";
+import routes from "routes";
+import { buildUrl } from "utils/url";
 
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "./constants";
 import MovieList from "./MovieList";
 
 const MoviePage = () => {
-  const [searchText, setSearchText] = useState("");
   const inputRef = useRef(null);
+  const history = useHistory();
+  const queryParams = useQueryParams();
+  const { page, searchTerm = "" } = queryParams;
+  const [searchText, setSearchText] = useState(searchTerm);
 
-  const debouncedSearchKey = useDebounce(searchText);
+  const updateQueryParams = useFuncDebounce(value => {
+    const params = {
+      page: DEFAULT_PAGE_NUMBER,
+      searchTerm: value || null,
+    };
 
-  const searchParams = { s: debouncedSearchKey };
-  const { data: { Search: movies = [] } = {}, isLoading } =
-    useFetchMovies(searchParams);
+    history.replace(buildUrl(routes.root, filterNonNull(params)));
+  });
+
+  const moviesParams = {
+    searchTerm,
+    page: Number(page) || DEFAULT_PAGE_NUMBER,
+  };
+
+  const { data: { Search: movies = [], totalResults } = {}, isLoading } =
+    useFetchMovies(moviesParams);
+
+  const handlePageNavigation = page =>
+    history.push(buildUrl(routes.root, mergeLeft({ page }, queryParams)));
 
   useEffect(() => {
     const handleKeyDown = e => {
@@ -48,11 +71,28 @@ const MoviePage = () => {
           suffix={<Kbd keyName="/" />}
           type="search"
           value={searchText}
-          onChange={e => setSearchText(e.target.value)}
+          onChange={e => {
+            setSearchText(e.target.value);
+            updateQueryParams(e.target.value);
+          }}
         />
       </div>
       <div>
-        {isEmpty(searchText) ? <EmptyPage /> : <MovieList movies={movies} />}
+        {isEmpty(searchTerm) ? (
+          <EmptyPage />
+        ) : (
+          <>
+            <MovieList movies={movies} />
+            <div className="flex justify-end">
+              <Pagination
+                count={totalResults}
+                navigate={handlePageNavigation}
+                pageNo={Number(page) || DEFAULT_PAGE_NUMBER}
+                pageSize={DEFAULT_PAGE_SIZE}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

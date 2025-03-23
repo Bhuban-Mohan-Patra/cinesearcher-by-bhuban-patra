@@ -20,6 +20,7 @@ const MovieCard = ({ movie }) => {
   } = movie;
 
   const imageUrl = setDefaultImage(poster);
+  console.log(imageUrl);
 
   return (
     <div className="m-5 overflow-hidden rounded-lg border border-gray-200  bg-white shadow-md transition-all duration-200 hover:shadow-lg">
