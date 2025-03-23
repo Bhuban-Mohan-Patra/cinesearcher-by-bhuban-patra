@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from "react";
 
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import useViewHistoryStore from "stores/useViewHistoryStore";
 
 const ViewHistory = () => {
+  const { t } = useTranslation();
   const movies = useViewHistoryStore(state => state.movies);
   const selectedMovie = useViewHistoryStore(state => state.selectedMovie);
   const historyContainerRef = useRef(null);
@@ -19,7 +21,9 @@ const ViewHistory = () => {
 
   return (
     <div className="h-screen w-full overflow-scroll rounded-lg bg-white p-4 shadow-lg">
-      <h2 className="mb-4 text-center text-lg font-bold">View history</h2>
+      <h2 className="mb-4 text-center text-lg font-bold">
+        {t("viewHistory.title")}
+      </h2>
       <div
         className="max-h-[70vh] space-y-2 overflow-y-auto"
         ref={historyContainerRef}

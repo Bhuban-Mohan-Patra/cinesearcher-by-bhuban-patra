@@ -1,10 +1,12 @@
 import { useShowMovies } from "hooks/reactQuery/useMoviesApi";
 import { Modal, Spinner, Tag, Typography } from "neetoui";
 import { isEmpty } from "ramda";
+import { useTranslation } from "react-i18next";
 import { setDefaultImage } from "utils/setDefaultImage";
 
 const MovieDetails = ({ id, isOpen, onClose }) => {
   const { Header, Body } = Modal;
+  const { t } = useTranslation();
 
   const { isLoading, data: movie = {} } = useShowMovies(id);
 
@@ -28,13 +30,13 @@ const MovieDetails = ({ id, isOpen, onClose }) => {
   const imageUrl = setDefaultImage(poster);
 
   const movieDetails = [
-    { label: "Director", value: director },
-    { label: "Actors", value: actors },
-    { label: "Box Office", value: boxOffice },
-    { label: "Year", value: year },
-    { label: "Runtime", value: runTime },
-    { label: "Language", value: language },
-    { label: "Rated", value: rated },
+    { label: t("movie.director"), value: director },
+    { label: t("movie.actors"), value: actors },
+    { label: t("movie.boxOffice"), value: boxOffice },
+    { label: t("movie.year"), value: year },
+    { label: t("movie.runtime"), value: runTime },
+    { label: t("movie.language"), value: language },
+    { label: t("movie.rated"), value: rated },
   ];
 
   return (

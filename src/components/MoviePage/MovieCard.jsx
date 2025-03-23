@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Typography } from "neetoui";
+import { useTranslation } from "react-i18next";
 import useViewHistoryStore from "stores/useViewHistoryStore";
 import { setDefaultImage } from "utils/setDefaultImage";
 
@@ -9,6 +10,7 @@ import MovieDetails from "./MovieDetails";
 const MovieCard = ({ movie }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setMovies, setSelectedMovie } = useViewHistoryStore();
+  const { t } = useTranslation();
 
   const {
     Title: title,
@@ -40,7 +42,8 @@ const MovieCard = ({ movie }) => {
           className="text-sm font-semibold text-gray-400"
           variant="body2"
         >
-          {type === "movie" ? "Movie" : "Series"} • {year}
+          {type === "movie" ? t("movie.type.movie") : t("movie.type.series")} •{" "}
+          {year}
         </Typography>
         <Button
           className="mt-4 bg-gray-100 font-bold text-blue-600"
@@ -50,7 +53,7 @@ const MovieCard = ({ movie }) => {
             setSelectedMovie(movie);
           }}
         >
-          view more
+          {t("movie.viewMore")}
         </Button>
       </div>
       {isModalOpen && (

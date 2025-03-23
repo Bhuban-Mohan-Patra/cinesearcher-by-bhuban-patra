@@ -9,16 +9,15 @@ import { evolve } from "ramda";
 
 const showSuccessToastr = response => {
   if (response.data?.Response === "False") {
-    Toastr.error(response.data.Error);
+    Toastr.error(t(`error.${response.data.Error}`));
   }
 };
 
 const showErrorToastr = error => {
   if (error.message === t("error.networkError")) {
     Toastr.error(t("error.noInternetConnection"));
-    Toastr.error(t("error.noInternetConnection"));
   } else if (error.response?.status !== 404) {
-    Toastr.error(error);
+    Toastr.error(t("error.generalError"));
   }
 };
 
