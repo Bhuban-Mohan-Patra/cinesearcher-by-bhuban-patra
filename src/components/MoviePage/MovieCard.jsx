@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Typography } from "neetoui";
 
+import MovieDetails from "./MovieDetails";
+
 const MovieCard = ({ movie }) => {
-  const { Title: title, Year: year, Poster: poster, Type: type } = movie;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(movie);
+  const {
+    Title: title,
+    Year: year,
+    Poster: poster,
+    Type: type,
+    imdbID: movieID,
+  } = movie;
 
   const imageUrl =
     poster === "N/A"
@@ -32,10 +42,20 @@ const MovieCard = ({ movie }) => {
         >
           {type === "movie" ? "Movie" : "Series"} • {year}
         </Typography>
-        <Button className="mt-4 bg-gray-100 font-bold text-blue-600">
+        <Button
+          className="mt-4 bg-gray-100 font-bold text-blue-600"
+          onClick={() => setIsModalOpen(true)}
+        >
           view more
         </Button>
       </div>
+      {isModalOpen && (
+        <MovieDetails
+          id={movieID}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
