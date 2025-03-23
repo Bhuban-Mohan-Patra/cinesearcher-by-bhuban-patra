@@ -34,7 +34,9 @@ const ViewHistory = () => {
                 ? "bg-blue-600 text-white"
                 : "bg-blue-100 text-black"
             )}
-          />
+          >
+            {movie.Title}
+          </div>
         ))}
       </div>
     </div>
