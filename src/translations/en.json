@@ -1,0 +1,34 @@
+{
+  "search": {
+    "placeholder": "Search movie or series..."
+  },
+
+  "movie": {
+    "type": {
+      "movie": "Movie",
+      "series": "Series"
+    },
+    "viewMore": "View More",
+    "director": "Director",
+    "actors": "Actors",
+    "boxOffice": "Box Office",
+    "year": "Year",
+    "runtime": "Runtime",
+    "language": "Language",
+    "rated": "Rated"
+  },
+
+  "error": {
+    "networkError": "Network Error",
+    "noInternetConnection": "No internet connection. Please check your connection.",
+    "generalError": "Something went wrong. Please try again."
+  },
+
+  "empty": {
+    "noMovies": "No Movies to show"
+  },
+
+  "viewHistory": {
+    "title": "View History"
+  }
+}

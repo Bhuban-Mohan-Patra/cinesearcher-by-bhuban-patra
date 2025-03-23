@@ -9,6 +9,7 @@ import { filterNonNull } from "neetocist";
 import { Search } from "neetoicons";
 import { Input, Kbd, Pagination } from "neetoui";
 import { isEmpty, mergeLeft } from "ramda";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
 import { buildUrl } from "utils/url";
@@ -18,6 +19,7 @@ import MovieList from "./MovieList";
 
 const MoviePage = () => {
   const inputRef = useRef(null);
+  const { t } = useTranslation();
   const history = useHistory();
   const queryParams = useQueryParams();
   const { page, searchTerm = "" } = queryParams;
@@ -65,7 +67,7 @@ const MoviePage = () => {
       <div className="mx-auto mb-8 max-w-2xl">
         <Input
           className="rounded-lg border border-[#ddd]"
-          placeholder="Search movie or series..."
+          placeholder={t("search.placeholder")}
           prefix={<Search />}
           ref={inputRef}
           suffix={<Kbd keyName="/" />}
