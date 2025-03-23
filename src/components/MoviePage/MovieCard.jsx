@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
 import { Button, Typography } from "neetoui";
+import useViewHistoryStore from "stores/useViewHistoryStore";
 import { setDefaultImage } from "utils/setDefaultImage";
 
 import MovieDetails from "./MovieDetails";
 
 const MovieCard = ({ movie }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setMovies, setSelectedMovie } = useViewHistoryStore();
+
   console.log(movie);
   const {
     Title: title,
@@ -42,7 +45,11 @@ const MovieCard = ({ movie }) => {
         </Typography>
         <Button
           className="mt-4 bg-gray-100 font-bold text-blue-600"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setIsModalOpen(true);
+            setMovies(movie);
+            setSelectedMovie(movie);
+          }}
         >
           view more
         </Button>
