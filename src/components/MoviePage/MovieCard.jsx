@@ -10,7 +10,6 @@ const MovieCard = ({ movie }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setMovies, setSelectedMovie } = useViewHistoryStore();
 
-  console.log(movie);
   const {
     Title: title,
     Year: year,
@@ -20,7 +19,6 @@ const MovieCard = ({ movie }) => {
   } = movie;
 
   const imageUrl = setDefaultImage(poster);
-  console.log(imageUrl);
 
   return (
     <div className="m-5 overflow-hidden rounded-lg border border-gray-200  bg-white shadow-md transition-all duration-200 hover:shadow-lg">
