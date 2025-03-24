@@ -25,7 +25,7 @@ const MoviePage = () => {
   const { page, searchTerm = "" } = queryParams;
   const [searchText, setSearchText] = useState(searchTerm);
 
-  const updateQueryParams = useFuncDebounce(value => {
+  const handleUpdateQueryParams = useFuncDebounce(value => {
     const params = {
       page: DEFAULT_PAGE_NUMBER,
       searchTerm: value || null,
@@ -73,8 +73,11 @@ const MoviePage = () => {
           type="search"
           value={searchText}
           onChange={e => {
-            setSearchText(e.target.value);
-            updateQueryParams(e.target.value);
+            const {
+              target: { value },
+            } = e;
+            setSearchText(`${value}`);
+            handleUpdateQueryParams(`${value}`);
           }}
         />
       </div>
