@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
 import { Route, Switch } from "react-router-dom";
 
 import "./App.css";

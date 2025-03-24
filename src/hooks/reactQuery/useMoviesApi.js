@@ -7,6 +7,7 @@ export const useFetchMovies = params =>
   useQuery({
     queryKey: [QUERY_KEYS.MOVIES, params],
     queryFn: () => moviesApi.fetch(params),
+    enabled: !!params.searchTerm,
   });
 
 export const useShowMovies = imdbID =>
