@@ -8,10 +8,10 @@
       "movie": "Movie",
       "series": "Series"
     },
-    "viewMore": "View More",
+    "viewMore": "View more",
     "director": "Director",
     "actors": "Actors",
-    "boxOffice": "Box Office",
+    "boxOffice": "Box office",
     "year": "Year",
     "runtime": "Runtime",
     "language": "Language",
@@ -19,16 +19,16 @@
   },
 
   "error": {
-    "networkError": "Network Error",
+    "networkError": "Network error",
     "noInternetConnection": "No internet connection. Please check your connection.",
     "generalError": "Something went wrong. Please try again."
   },
 
   "empty": {
-    "noMovies": "No Movies to show"
+    "noMovies": "No movies to show"
   },
 
   "viewHistory": {
-    "title": "View History"
+    "title": "View history"
   }
 }
