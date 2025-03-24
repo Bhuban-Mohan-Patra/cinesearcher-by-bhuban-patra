@@ -1,3 +1,5 @@
+import { OMDB_API_URL, OMDB_API_KEY } from "constants";
+
 import {
   keysToCamelCase,
   serializeKeysToSnakeCase,
@@ -58,9 +60,9 @@ const setHttpHeaders = () => {
 };
 
 export default function initializeAxios() {
-  axios.defaults.baseURL = "https://www.omdbapi.com/";
+  axios.defaults.baseURL = OMDB_API_URL;
   axios.defaults.params = {
-    apikey: process.env.REACT_APP_OMDB_API_KEY,
+    apikey: OMDB_API_KEY,
   };
   setHttpHeaders();
   responseInterceptors();
