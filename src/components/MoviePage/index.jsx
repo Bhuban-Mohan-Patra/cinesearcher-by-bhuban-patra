@@ -26,13 +26,22 @@ const MoviePage = () => {
   const [searchText, setSearchText] = useState(searchTerm);
 
   const handleUpdateQueryParams = useFuncDebounce(value => {
-    const params = {
-      page: DEFAULT_PAGE_NUMBER,
+    const params = filterNonNull({
       searchTerm: value || null,
-    };
+      page: value ? DEFAULT_PAGE_NUMBER : null,
+    });
 
-    history.replace(buildUrl(routes.root, filterNonNull(params)));
+    history.replace(buildUrl(routes.root, params));
   });
+
+  // const handleUpdateQueryParams = useFuncDebounce(value => {
+  //   const params = {
+  //     page: DEFAULT_PAGE_NUMBER,
+  //     searchTerm: value || null,
+  //   };
+
+  //   history.replace(buildUrl(routes.root, filterNonNull(params)));
+  // });
 
   const moviesParams = {
     searchTerm,
