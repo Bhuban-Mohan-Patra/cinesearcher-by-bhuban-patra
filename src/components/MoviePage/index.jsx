@@ -7,7 +7,7 @@ import useFuncDebounce from "hooks/useFuncDebounce";
 import useQueryParams from "hooks/useQueryParams";
 import { filterNonNull } from "neetocist";
 import { Search } from "neetoicons";
-import { Input, Kbd, Pagination } from "neetoui";
+import { Input, Pagination } from "neetoui";
 import { isEmpty, mergeLeft } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -70,7 +70,6 @@ const MoviePage = () => {
           placeholder={t("search.placeholder")}
           prefix={<Search />}
           ref={inputRef}
-          suffix={<Kbd keyName="/" />}
           type="search"
           value={searchText}
           onChange={e => {

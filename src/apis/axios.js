@@ -8,8 +8,11 @@ import { Toastr } from "neetoui";
 import { evolve } from "ramda";
 
 const showSuccessToastr = response => {
+  const {
+    data: { Error },
+  } = response;
   if (response.data?.Response === "False") {
-    Toastr.error(t(`error.${response.data.Error}`));
+    Toastr.error(t(`${Error}`));
   }
 };
 
