@@ -8,7 +8,7 @@ import useQueryParams from "hooks/useQueryParams";
 import { filterNonNull } from "neetocist";
 import { Search } from "neetoicons";
 import { Input, Pagination } from "neetoui";
-import { isEmpty, mergeLeft } from "ramda";
+import { mergeLeft } from "ramda";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import routes from "routes";
@@ -33,15 +33,6 @@ const MoviePage = () => {
 
     history.replace(buildUrl(routes.root, params));
   });
-
-  // const handleUpdateQueryParams = useFuncDebounce(value => {
-  //   const params = {
-  //     page: DEFAULT_PAGE_NUMBER,
-  //     searchTerm: value || null,
-  //   };
-
-  //   history.replace(buildUrl(routes.root, filterNonNull(params)));
-  // });
 
   const moviesParams = {
     searchTerm,
@@ -69,10 +60,8 @@ const MoviePage = () => {
     };
   }, []);
 
-  if (isLoading) return <PageLoader />;
-
   return (
-    <div className="p-6">
+    <div className="h-screen w-full p-6">
       <div className="mx-auto mb-8 max-w-2xl">
         <Input
           className="rounded-lg border border-[#ddd]"
@@ -90,23 +79,21 @@ const MoviePage = () => {
           }}
         />
       </div>
-      <div>
-        {isEmpty(searchTerm) ? (
-          <EmptyPage />
-        ) : (
-          <>
-            <MovieList movies={movies} />
-            <div className="flex justify-end">
-              <Pagination
-                count={totalResults}
-                navigate={handlePageNavigation}
-                pageNo={Number(page) || DEFAULT_PAGE_NUMBER}
-                pageSize={DEFAULT_PAGE_SIZE}
-              />
-            </div>
-          </>
-        )}
-      </div>
+      {isLoading && <PageLoader />}
+      {!isLoading && !searchTerm.trim() && <EmptyPage />}
+      {!isLoading && searchTerm.trim() && (
+        <div className="relative h-5/6">
+          <MovieList movies={movies} />
+          <div className="absolute right-4 mt-6">
+            <Pagination
+              count={totalResults}
+              navigate={handlePageNavigation}
+              pageNo={Number(page) || DEFAULT_PAGE_NUMBER}
+              pageSize={DEFAULT_PAGE_SIZE}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
