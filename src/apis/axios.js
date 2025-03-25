@@ -14,15 +14,15 @@ const showSuccessToastr = response => {
     data: { Error },
   } = response;
   if (response.data?.Response === "False") {
-    Toastr.error(t(`${Error}`));
+    Toastr.error(t(`${Error}`), { autoClose: 1500 });
   }
 };
 
 const showErrorToastr = error => {
   if (error.message === t("error.networkError")) {
-    Toastr.error(t("error.noInternetConnection"));
+    Toastr.error(t("error.noInternetConnection"), { autoClose: 1500 });
   } else if (error.response?.status !== 404) {
-    Toastr.error(t("error.generalError"));
+    Toastr.error(t("error.generalError"), { autoClose: 1500 });
   }
 };
 

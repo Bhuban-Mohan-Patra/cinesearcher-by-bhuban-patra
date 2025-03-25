@@ -23,38 +23,26 @@ const MovieCard = ({ movie }) => {
   const imageUrl = setDefaultImage(poster);
 
   return (
-    <div className="m-5 overflow-hidden rounded-lg border border-gray-200  bg-white shadow-md transition-all duration-200 hover:shadow-lg">
-      <div className="aspect-[2/3] w-full px-8">
-        <img
-          alt={title}
-          className="h-full w-full object-cover"
-          src={imageUrl}
-        />
-      </div>
-      <div className="px-8 py-6 text-center">
-        <Typography
-          className="mb-2 text-3xl font-bold text-gray-800"
-          variant="body1"
-        >
+    <div className="flex h-auto w-52 flex-col rounded-lg border p-4 shadow-lg">
+      <img alt={title} className="mx-auto h-2/3 w-2/3" src={imageUrl} />
+      <div className="flex flex-col gap-2">
+        <Typography className="font-bold text-gray-800" variant="body1">
           {title}
         </Typography>
-        <Typography
-          className="text-sm font-semibold text-gray-400"
-          variant="body2"
-        >
+        <Typography className="font-bold text-gray-400" variant="body2">
           {type === "movie" ? t("movie.type.movie") : t("movie.type.series")} •{" "}
           {year}
         </Typography>
         <Button
-          className="mt-4 bg-gray-100 font-bold text-blue-600"
+          className="w-2/3 bg-gray-100 text-center font-bold text-blue-600"
+          label={t("movie.viewMore")}
+          style="text"
           onClick={() => {
             setIsModalOpen(true);
             setMovies(movie);
             setSelectedMovie(movie);
           }}
-        >
-          {t("movie.viewMore")}
-        </Button>
+        />
       </div>
       {isModalOpen && (
         <MovieDetails

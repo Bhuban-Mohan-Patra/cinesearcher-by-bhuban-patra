@@ -5,7 +5,7 @@ const EmptyPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="my-96 flex h-full justify-center">
+    <div className="my-20 flex h-full justify-center">
       <NoData title={t("empty.noMovies")} />
     </div>
   );

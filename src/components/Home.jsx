@@ -2,11 +2,11 @@ import ViewHistory from "./MovieHistory";
 import MoviePage from "./MoviePage";
 
 const Home = () => (
-  <div className="grid grid-cols-4">
-    <div className="col-span-3">
+  <div className="flex h-screen w-full overflow-hidden">
+    <div className="w-2/3 lg:w-3/4">
       <MoviePage />
     </div>
-    <div className="col-span-1 mx-4 my-10 flex justify-center">
+    <div className="w-1/3 lg:w-1/4">
       <ViewHistory />
     </div>
   </div>
