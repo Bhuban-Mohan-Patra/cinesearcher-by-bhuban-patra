@@ -59,9 +59,10 @@ const MovieDetails = ({ id, isOpen, onClose }) => {
           <div className="flex h-full">
             <div className="w-1/3 p-1">
               <img
-                alt={title}
+                alt={`${title} Poster`}
                 className="neeto-ui-rounded-lg object-contain"
                 src={imageUrl}
+                onError={event => (event.target.src = setDefaultImage("N/A"))}
               />
             </div>
             <div className="ml-10 w-2/3 space-y-4 p-4">
