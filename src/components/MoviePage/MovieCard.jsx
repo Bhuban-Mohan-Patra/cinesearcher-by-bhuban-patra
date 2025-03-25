@@ -24,7 +24,12 @@ const MovieCard = ({ movie }) => {
 
   return (
     <div className="flex h-auto w-52 flex-col rounded-lg border p-4 shadow-lg">
-      <img alt={title} className="mx-auto h-2/3 w-2/3" src={imageUrl} />
+      <img
+        alt={`${title} Poster`}
+        className="mx-auto h-2/3 w-2/3"
+        src={imageUrl}
+        onError={event => (event.target.src = setDefaultImage("N/A"))}
+      />
       <div className="flex flex-col gap-2">
         <Typography className="font-bold text-gray-800" variant="body1">
           {title}
