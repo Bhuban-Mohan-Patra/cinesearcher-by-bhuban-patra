@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 
 import classNames from "classnames";
 import { Delete } from "neetoicons";
-import { Alert, Button } from "neetoui";
+import { Alert, Button, Typography } from "neetoui";
 import { useTranslation } from "react-i18next";
 import useViewHistoryStore from "stores/useViewHistoryStore";
 
@@ -44,12 +44,12 @@ const History = () => {
   return (
     <div
       className="w-full overflow-y-scroll rounded-lg bg-white p-4 shadow-lg"
-      style={{ height: "90vh" }}
+      style={{ height: "89vh" }}
     >
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-center text-lg font-bold">
+      <div className="sticky top-0 mb-4 flex items-center justify-between">
+        <Typography className="text-center text-lg font-bold">
           {t("viewHistory.title")}
-        </h2>
+        </Typography>
         <Button
           className="font-semibold text-red-600"
           disabled={!movies.length}

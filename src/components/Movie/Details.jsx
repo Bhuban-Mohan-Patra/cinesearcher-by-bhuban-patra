@@ -6,6 +6,8 @@ import { useTranslation } from "react-i18next";
 import useFavouriteMoviesStore from "stores/useFavouriteMoviesStore";
 import { setDefaultImage } from "utils/setDefaultImage";
 
+import { getMovieDetails } from "./constants";
+
 const Details = ({ id, isOpen, onClose }) => {
   const { addFavouriteMovie, removeFavouriteMovie, favouriteMovies } =
     useFavouriteMoviesStore();
@@ -25,34 +27,13 @@ const Details = ({ id, isOpen, onClose }) => {
 
   const { isLoading, data: movie = {} } = useShowMovies(id);
 
-  const {
-    Title: title,
-    Year: year,
-    Genre: genre,
-    Poster: poster,
-    Plot: plot,
-    Actors: actors,
-    Director: director,
-    BoxOffice: boxOffice,
-    Runtime: runTime,
-    Language: language,
-    Rated: rated,
-  } = movie;
+  const { Title: title, Genre: genre, Poster: poster, Plot: plot } = movie;
 
-  console.log(title, poster);
   const genres = genre ? genre.split(", ") : [];
 
   const imageUrl = setDefaultImage(poster);
 
-  const movieDetails = [
-    { label: t("movie.director"), value: director },
-    { label: t("movie.actors"), value: actors },
-    { label: t("movie.boxOffice"), value: boxOffice },
-    { label: t("movie.year"), value: year },
-    { label: t("movie.runtime"), value: runTime },
-    { label: t("movie.language"), value: language },
-    { label: t("movie.rated"), value: rated },
-  ];
+  const movieDetails = getMovieDetails(t, movie);
 
   return (
     <Modal isOpen={isOpen} size="large" onClose={onClose}>
@@ -102,7 +83,7 @@ const Details = ({ id, isOpen, onClose }) => {
                   {movieDetails.map(({ label, value }) => (
                     <div className="flex items-center gap-2" key={label}>
                       <Typography style="body2" weight="bold">
-                        {label}
+                        {label}:
                       </Typography>
                       <Typography style="body2">{value}</Typography>
                     </div>
