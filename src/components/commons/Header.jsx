@@ -10,18 +10,18 @@ const Header = () => (
       </Typography>
       <div className="flex space-x-3">
         <NavLink
+          exact
+          activeClassName="font-semibold text-blue-600"
+          className="text-gray-800"
           to="/"
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-blue-600" : "text-gray-800"
-          }
         >
           Home
         </NavLink>
         <NavLink
+          exact
+          activeClassName="font-semibold text-blue-600"
+          className="text-gray-800"
           to="/favourites"
-          className={({ isActive }) =>
-            isActive ? "font-semibold text-blue-600" : "text-gray-800"
-          }
         >
           Favourites
         </NavLink>
