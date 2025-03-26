@@ -6,6 +6,8 @@ import { Alert, Button } from "neetoui";
 import { useTranslation } from "react-i18next";
 import useViewHistoryStore from "stores/useViewHistoryStore";
 
+import EmptyPage from "./commons/EmptyPage";
+
 const ViewHistory = () => {
   const [isClearAlertOpen, setIsClearAlertOpen] = useState(false);
   const [latestMovie, setLatestMovie] = useState(null);
@@ -56,29 +58,34 @@ const ViewHistory = () => {
           onClick={handleClearHistory}
         />
       </div>
-      <div
-        className="max-h-[70vh] space-y-2 overflow-y-auto"
-        ref={historyContainerRef}
-      >
-        {movies.map((movie, index) => (
-          <div
-            key={`${movie.imdbID}-${index}`}
-            ref={el => (movieItemRefs.current[movie.imdbID] = el)}
-            className={classNames(
-              "flex items-center justify-between rounded-lg px-4 py-3 transition-colors",
-              movie.imdbID === latestMovie?.imdbID
-                ? "bg-blue-600 text-white"
-                : "bg-blue-100 text-black"
-            )}
-          >
-            <span>{movie.Title}</span>
-            <Delete
-              className="cursor-pointer"
-              onClick={() => handleRemoveMovie(movie.imdbID)}
-            />
-          </div>
-        ))}
-      </div>
+      {movies.length === 0 ? (
+        <EmptyPage text="No movies in history" />
+      ) : (
+        <div
+          className="max-h-[70vh] space-y-2 overflow-y-auto"
+          ref={historyContainerRef}
+        >
+          {movies.map((movie, index) => (
+            <div
+              key={`${movie.imdbID}-${index}`}
+              ref={el => (movieItemRefs.current[movie.imdbID] = el)}
+              className={classNames(
+                "flex items-center justify-between rounded-lg px-4 py-3 transition-colors",
+                movie.imdbID === latestMovie?.imdbID
+                  ? "bg-blue-600 text-white"
+                  : "bg-blue-100 text-black"
+              )}
+            >
+              <span>{movie.Title}</span>
+              <Delete
+                className="cursor-pointer"
+                onClick={() => handleRemoveMovie(movie.imdbID)}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+      ;
       <Alert
         cancelButtonLabel="Cancel"
         closeOnOutsideClick={false}
