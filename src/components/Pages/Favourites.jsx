@@ -1,8 +1,11 @@
+import EmptyPage from "components/commons/EmptyPage";
 import { Typography } from "neetoui";
 import { isEmpty } from "ramda";
+import { useTranslation } from "react-i18next";
 import useFavouriteMoviesStore from "stores/useFavouriteMoviesStore";
 
 const Favourites = () => {
+  const { t } = useTranslation();
   const favouriteMovies = useFavouriteMoviesStore(
     state => state.favouriteMovies
   );
@@ -21,7 +24,9 @@ const Favourites = () => {
                   {Title}
                 </Typography>
                 <div className="flex  items-end gap-2">
-                  <span className="text-sm text-gray-500">Rating : </span>
+                  <span className="text-sm text-gray-500">
+                    {t("favourites.rating")} :{" "}
+                  </span>
                   <span className="font-semibold text-gray-600">
                     {imdbRating}/10
                   </span>
@@ -29,9 +34,7 @@ const Favourites = () => {
               </div>
             ))
           ) : (
-            <Typography className="mt-10 text-center text-gray-500">
-              No favourites added yet.
-            </Typography>
+            <EmptyPage text={t("favourites.empty")} />
           )}
         </div>
       </div>
