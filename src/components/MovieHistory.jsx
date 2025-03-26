@@ -19,7 +19,7 @@ const ViewHistory = () => {
   const movieItemRefs = useRef({});
 
   useEffect(() => {
-    setLatestMovie(movies.length > 0 ? movies[movies.length - 1] : null);
+    setLatestMovie(movies.length > 0 ? movies[0] : null);
   }, [movies]);
 
   const handleRemoveMovie = movieId => {
