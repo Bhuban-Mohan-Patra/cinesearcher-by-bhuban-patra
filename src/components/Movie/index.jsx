@@ -63,11 +63,35 @@ const MoviePage = () => {
     };
   }, []);
 
+  const renderContent = () => {
+    if (isLoading) {
+      return <PageLoader />;
+    }
+
+    if (!searchTerm.trim()) {
+      return <EmptyPage text={t("empty.movie")} />;
+    }
+
+    return (
+      <div className="relative" style={{ height: "68vh" }}>
+        <MovieList movies={movies} />
+        <div className="absolute right-4 mt-6">
+          <Pagination
+            count={totalResults}
+            navigate={handlePageNavigation}
+            pageNo={Number(page) || DEFAULT_PAGE_NUMBER}
+            pageSize={DEFAULT_PAGE_SIZE}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="h-screen w-full p-6">
       <div className="mx-auto mb-8 flex max-w-2xl items-center gap-3">
         <Input
-          className="rounded-lg border border-[#ddd]"
+          className="rounded-lg border"
           placeholder={t("search.placeholder")}
           prefix={<Search />}
           ref={inputRef}
@@ -77,29 +101,13 @@ const MoviePage = () => {
             const {
               target: { value },
             } = e;
-            setSearchText(`${value}`);
-            handleUpdateQueryParams(`${value}`);
+            setSearchText(value);
+            handleUpdateQueryParams(value);
           }}
         />
         <Filter searchTerm={searchTerm} />
       </div>
-      {isLoading && <PageLoader />}
-      {!isLoading && !searchTerm.trim() && (
-        <EmptyPage text={t("empty.movie")} />
-      )}
-      {!isLoading && searchTerm.trim() && (
-        <div className="relative" style={{ height: "68vh" }}>
-          <MovieList movies={movies} />
-          <div className="absolute right-4 mt-6">
-            <Pagination
-              count={totalResults}
-              navigate={handlePageNavigation}
-              pageNo={Number(page) || DEFAULT_PAGE_NUMBER}
-              pageSize={DEFAULT_PAGE_SIZE}
-            />
-          </div>
-        </div>
-      )}
+      {renderContent()}
     </div>
   );
 };
