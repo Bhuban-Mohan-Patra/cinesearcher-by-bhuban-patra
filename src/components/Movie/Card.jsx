@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 import useViewHistoryStore from "stores/useViewHistoryStore";
 import { setDefaultImage } from "utils/setDefaultImage";
 
-import MovieDetails from "./MovieDetails";
+import MovieDetails from "./Details";
 
-const MovieCard = ({ movie }) => {
+const Card = ({ movie }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setMovies, setSelectedMovie } = useViewHistoryStore();
   const { t } = useTranslation();
@@ -63,4 +63,4 @@ const MovieCard = ({ movie }) => {
     </div>
   );
 };
-export default MovieCard;
+export default Card;

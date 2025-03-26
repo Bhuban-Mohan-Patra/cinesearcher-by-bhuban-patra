@@ -1,10 +1,10 @@
 import Header from "components/commons/Header";
 import PageNotFound from "components/commons/PageNotFound";
-import Favourites from "components/Favourites";
+import Favourites from "components/Pages/Favourites";
 import { Route, Switch } from "react-router-dom";
 
 import "./App.css";
-import Home from "./components/Home";
+import Home from "./components/Pages/Home";
 import routes from "./routes";
 
 const App = () => (

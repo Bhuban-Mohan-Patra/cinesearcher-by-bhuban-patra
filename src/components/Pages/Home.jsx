@@ -1,5 +1,6 @@
-import ViewHistory from "./MovieHistory";
-import MoviePage from "./MoviePage";
+import MoviePage from "components/Movie";
+
+import History from "./History";
 
 const Home = () => (
   <div className="mt-16 flex w-full overflow-hidden" style={{ height: "90vh" }}>
@@ -7,7 +8,7 @@ const Home = () => (
       <MoviePage />
     </div>
     <div className="w-1/3 lg:w-1/4">
-      <ViewHistory />
+      <History />
     </div>
   </div>
 );
