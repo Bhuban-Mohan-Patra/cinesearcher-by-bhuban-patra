@@ -1,4 +1,4 @@
-import { uniqBy, pipe, append } from "ramda";
+import { uniqBy, pipe, prepend } from "ramda";
 import { create } from "zustand";
 
 const useViewHistoryStore = create(set => ({
@@ -7,7 +7,7 @@ const useViewHistoryStore = create(set => ({
   setMovies: movie =>
     set(state => ({
       movies: pipe(
-        append(movie),
+        prepend(movie),
         uniqBy(m => m.imdbID)
       )(state.movies),
     })),
