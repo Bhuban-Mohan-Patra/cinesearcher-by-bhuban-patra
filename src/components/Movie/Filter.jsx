@@ -89,13 +89,13 @@ const Filter = ({ searchTerm }) => {
         </div>
         <div className="mb-4">
           <Typography className="mb-2 font-medium" variant="body1">
-            "Year"
+            {t("filters.year")}
           </Typography>
           <Input
             className="w-full"
             error={yearError}
             pattern="[0-9]*"
-            placeholder="Input year"
+            placeholder={t("filters.yearPlaceholder")}
             type="number"
             value={yearInput}
             onChange={({ target: { value } }) => handleYearChange(value)}
@@ -108,17 +108,17 @@ const Filter = ({ searchTerm }) => {
         </div>
         <div>
           <Typography className="mb-2 font-medium" variant="body1">
-            {t("labels.type")}
+            {t("filters.type")}
           </Typography>
           <div className="flex gap-6">
             <Checkbox
               checked={!queryParams.type || queryParams.type === "movie"}
-              labels={t("labels.movie")}
+              label={t("movie.type.movie")}
               onChange={() => handleTypeChange("movie")}
             />
             <Checkbox
               checked={!queryParams.type || queryParams.type === "series"}
-              labels={t("labels.series")}
+              label={t("movie.type.series")}
               onChange={() => handleTypeChange("series")}
             />
           </div>

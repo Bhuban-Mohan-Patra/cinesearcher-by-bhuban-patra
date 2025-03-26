@@ -53,13 +53,13 @@ const History = () => {
         <Button
           className="font-semibold text-red-600"
           disabled={!movies.length}
-          label="Clear all"
+          label={t("viewHistory.clearAll")}
           style="tertiary"
           onClick={handleClearHistory}
         />
       </div>
       {movies.length === 0 ? (
-        <EmptyPage text="No movies in history" />
+        <EmptyPage text={t("viewHistory.empty")} />
       ) : (
         <div
           className="max-h-[70vh] space-y-2 overflow-y-auto"
@@ -86,12 +86,12 @@ const History = () => {
         </div>
       )}
       <Alert
-        cancelButtonLabel="Cancel"
+        cancelButtonLabel={t("common.cancel")}
         closeOnOutsideClick={false}
         isOpen={isClearAlertOpen}
-        message="Are you sure you want to clear all history?"
-        submitButtonLabel="Clear"
-        title="Clear View History"
+        message={t("viewHistory.confirmClearMessage")}
+        submitButtonLabel={t("common.clear")}
+        title={t("viewHistory.clearTitle")}
         onClose={() => setIsClearAlertOpen(false)}
         onSubmit={confirmClearHistory}
       />

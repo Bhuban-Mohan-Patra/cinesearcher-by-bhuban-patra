@@ -16,7 +16,7 @@ import { buildUrl } from "utils/url";
 
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "./constants";
 import Filter from "./Filter";
-import MovieList from "./MovieList";
+import MovieList from "./List";
 
 const MoviePage = () => {
   const inputRef = useRef(null);
@@ -85,7 +85,7 @@ const MoviePage = () => {
       </div>
       {isLoading && <PageLoader />}
       {!isLoading && !searchTerm.trim() && (
-        <EmptyPage text="No movies to show" />
+        <EmptyPage text={t("empty.movie")} />
       )}
       {!isLoading && searchTerm.trim() && (
         <div className="relative" style={{ height: "68vh" }}>

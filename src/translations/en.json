@@ -1,4 +1,26 @@
 {
+  "logoName": {
+    "cine": "Cine",
+    "searcher": "Searcher"
+  },
+
+  "navigation": {
+    "home": "Home",
+    "favourites": "Favourites"
+  },
+
+  "pageNotFound": {
+    "message": "The page you're looking for can't be found",
+    "backToHome": "Back to home"
+  },
+
+  "validation": {
+    "year": {
+      "min": "Year must be at least 1900",
+      "max": "Year must be less than or equal to {{year}}"
+    }
+  },
+
   "search": {
     "placeholder": "Search movie or series..."
   },
@@ -15,7 +37,16 @@
     "year": "Year",
     "runtime": "Runtime",
     "language": "Language",
-    "rated": "Rated"
+    "rated": "Rated",
+    "addToFavourites": "Add to favourites",
+    "removeFromFavourites": "Remove from favourites"
+  },
+
+  "filters": {
+    "title": "Filters",
+    "year": "Year",
+    "yearPlaceholder": "Enter year",
+    "type": "Type"
   },
 
   "error": {
@@ -25,10 +56,25 @@
   },
 
   "empty": {
-    "noMovies": "No movies to show"
+    "noMovies": "No movies to show",
+    "movie": "No movies to show"
   },
 
   "viewHistory": {
-    "title": "View history"
+    "title": "View history",
+    "clearAll": "Clear all",
+    "empty": "No movies in history",
+    "confirmClearMessage": "Are you sure you want to clear all history?",
+    "clearTitle": "Clear View History"
+  },
+
+  "favourites": {
+    "rating": "Rating",
+    "empty": "No favourites added yet."
+  },
+
+  "common": {
+    "cancel": "Cancel",
+    "clear": "Clear"
   }
 }

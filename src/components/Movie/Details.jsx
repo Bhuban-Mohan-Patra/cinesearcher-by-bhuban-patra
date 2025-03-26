@@ -7,16 +7,10 @@ import useFavouriteMoviesStore from "stores/useFavouriteMoviesStore";
 import { setDefaultImage } from "utils/setDefaultImage";
 
 const Details = ({ id, isOpen, onClose }) => {
-  // const [isFavorited, setIsFavorited] = useState(false);
-
   const { addFavouriteMovie, removeFavouriteMovie, favouriteMovies } =
     useFavouriteMoviesStore();
 
   const isFavorited = favouriteMovies.some(movie => movie.imdbID === id);
-
-  // const toggleFavorite = () => {
-  //   setIsFavorited(!isFavorited);
-  // };
 
   const toggleFavorite = () => {
     if (isFavorited) {
@@ -76,8 +70,8 @@ const Details = ({ id, isOpen, onClose }) => {
                 style="tertiary"
                 tooltipProps={{
                   content: isFavorited
-                    ? "Remove from favourites"
-                    : "Add to favourites",
+                    ? t("movie.removeFromFavourites")
+                    : t("movie.addToFavourites"),
                   position: "right",
                 }}
                 onClick={toggleFavorite}
