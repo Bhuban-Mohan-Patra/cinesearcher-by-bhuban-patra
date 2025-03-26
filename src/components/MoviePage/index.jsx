@@ -15,6 +15,7 @@ import routes from "routes";
 import { buildUrl } from "utils/url";
 
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "./constants";
+import Filter from "./Filter";
 import MovieList from "./MovieList";
 
 const MoviePage = () => {
@@ -22,7 +23,7 @@ const MoviePage = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const queryParams = useQueryParams();
-  const { page, searchTerm = "" } = queryParams;
+  const { page, searchTerm = "", type, year } = queryParams;
   const [searchText, setSearchText] = useState(searchTerm);
 
   const handleUpdateQueryParams = useFuncDebounce(value => {
@@ -37,6 +38,8 @@ const MoviePage = () => {
   const moviesParams = {
     searchTerm,
     page: Number(page) || DEFAULT_PAGE_NUMBER,
+    year,
+    type,
   };
 
   const { data: { Search: movies = [], totalResults } = {}, isLoading } =
@@ -62,7 +65,7 @@ const MoviePage = () => {
 
   return (
     <div className="h-screen w-full p-6">
-      <div className="mx-auto mb-8 max-w-2xl">
+      <div className="mx-auto mb-8 flex max-w-2xl items-center gap-3">
         <Input
           className="rounded-lg border border-[#ddd]"
           placeholder={t("search.placeholder")}
@@ -78,11 +81,12 @@ const MoviePage = () => {
             handleUpdateQueryParams(`${value}`);
           }}
         />
+        <Filter searchTerm={searchTerm} />
       </div>
       {isLoading && <PageLoader />}
       {!isLoading && !searchTerm.trim() && <EmptyPage />}
       {!isLoading && searchTerm.trim() && (
-        <div className="relative h-5/6">
+        <div className="relative" style={{ height: "68vh" }}>
           <MovieList movies={movies} />
           <div className="absolute right-4 mt-6">
             <Pagination
