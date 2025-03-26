@@ -34,12 +34,16 @@ const MovieCard = ({ movie }) => {
         <Typography className="font-bold text-gray-800" variant="body1">
           {title}
         </Typography>
-        <Typography className="font-bold text-gray-400" variant="body2">
+        <Typography
+          className="font-bold text-gray-400"
+          variant="body2"
+          weight="bold"
+        >
           {type === "movie" ? t("movie.type.movie") : t("movie.type.series")} •{" "}
           {year}
         </Typography>
         <Button
-          className="w-2/3 bg-gray-100 text-center font-bold text-blue-600"
+          className="flex w-2/3 justify-center bg-gray-100 font-bold text-blue-600"
           label={t("movie.viewMore")}
           style="text"
           onClick={() => {
@@ -59,5 +63,4 @@ const MovieCard = ({ movie }) => {
     </div>
   );
 };
-
 export default MovieCard;
