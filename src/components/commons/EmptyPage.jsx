@@ -1,14 +1,10 @@
 import { NoData } from "neetoui";
-import { useTranslation } from "react-i18next";
 
-const EmptyPage = () => {
-  const { t } = useTranslation();
+const EmptyPage = ({ text }) => (
+  // const { t } = useTranslation();
 
-  return (
-    <div className="my-20 flex h-full justify-center">
-      <NoData title={t("empty.noMovies")} />
-    </div>
-  );
-};
-
+  <div className="my-20 flex h-full justify-center">
+    <NoData title={text} />
+  </div>
+);
 export default EmptyPage;

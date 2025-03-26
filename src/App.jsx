@@ -1,4 +1,5 @@
 import Header from "components/commons/Header";
+import PageNotFound from "components/commons/PageNotFound";
 import Favourites from "components/Favourites";
 import { Route, Switch } from "react-router-dom";
 
@@ -12,8 +13,7 @@ const App = () => (
     <Switch>
       <Route exact component={Home} path={routes.root} />
       <Route exact component={Favourites} path={routes.favourites} />
-      {/* <Redirect exact from={routes.root} to={routes.root} /> */}
-      {/* <Route component={PageNotFound} path="*" /> */}
+      <Route component={PageNotFound} path="*" />
     </Switch>
   </>
 );

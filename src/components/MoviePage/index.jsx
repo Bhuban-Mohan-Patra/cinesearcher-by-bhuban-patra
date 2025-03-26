@@ -84,7 +84,9 @@ const MoviePage = () => {
         <Filter searchTerm={searchTerm} />
       </div>
       {isLoading && <PageLoader />}
-      {!isLoading && !searchTerm.trim() && <EmptyPage />}
+      {!isLoading && !searchTerm.trim() && (
+        <EmptyPage text="No movies to show" />
+      )}
       {!isLoading && searchTerm.trim() && (
         <div className="relative" style={{ height: "68vh" }}>
           <MovieList movies={movies} />
