@@ -2,8 +2,6 @@ import { Typography } from "neetoui";
 import { isEmpty } from "ramda";
 import useFavouriteMoviesStore from "stores/useFavouriteMoviesStore";
 
-import Header from "./commons/Header";
-
 const Favourites = () => {
   const favouriteMovies = useFavouriteMoviesStore(
     state => state.favouriteMovies
@@ -11,9 +9,8 @@ const Favourites = () => {
 
   return (
     <div className="mt-20 p-6">
-      <Header />
-      <div className="mt-10 flex flex-col items-center">
-        <div className="max-h-96 w-2/3 space-y-4 overflow-y-auto rounded-lg  border-gray-300 p-4">
+      <div className="max-h-1/4 mt-1 flex flex-col items-center px-20">
+        <div className="w-full space-y-4 overflow-y-auto rounded-lg  border-gray-200 px-6 py-4">
           {!isEmpty(favouriteMovies) ? (
             favouriteMovies?.map(({ imdbID, Title, imdbRating }) => (
               <div

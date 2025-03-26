@@ -8,10 +8,10 @@ import useViewHistoryStore from "stores/useViewHistoryStore";
 
 const ViewHistory = () => {
   const [isClearAlertOpen, setIsClearAlertOpen] = useState(false);
+  const [latestMovie, setLatestMovie] = useState(null);
   const { t } = useTranslation();
-  const movies = useViewHistoryStore(state => state.movies);
-  const selectedMovie = useViewHistoryStore(state => state.selectedMovie);
 
+  const movies = useViewHistoryStore(state => state.movies);
   const removeMovie = useViewHistoryStore(state => state.removeMovie);
   const clearHistory = useViewHistoryStore(state => state.clearHistory);
 
@@ -19,31 +19,38 @@ const ViewHistory = () => {
   const movieItemRefs = useRef({});
 
   useEffect(() => {
-    if (selectedMovie) {
-      movieItemRefs.current[selectedMovie.Title]?.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  }, [selectedMovie]);
+    setLatestMovie(movies.length > 0 ? movies[movies.length - 1] : null);
+  }, [movies]);
 
-  const handleClearHistory = () => {
-    setIsClearAlertOpen(true);
+  const handleRemoveMovie = movieId => {
+    removeMovie(movieId);
+
+    const updatedMovies = movies.filter(movie => movie.imdbID !== movieId);
+    setLatestMovie(
+      updatedMovies.length ? updatedMovies[updatedMovies.length - 1] : null
+    );
   };
+
+  const handleClearHistory = () => setIsClearAlertOpen(true);
 
   const confirmClearHistory = () => {
     clearHistory();
     setIsClearAlertOpen(false);
+    setLatestMovie(null);
   };
 
   return (
-    <div className="h-screen max-h-screen w-full overflow-y-scroll rounded-lg bg-white p-4 shadow-lg">
+    <div
+      className="w-full overflow-y-scroll rounded-lg bg-white p-4 shadow-lg"
+      style={{ height: "90vh" }}
+    >
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-center text-lg font-bold">
           {t("viewHistory.title")}
         </h2>
         <Button
-          className="font-semibold text-red-600 "
-          disabled={movies.length === 0}
+          className="font-semibold text-red-600"
+          disabled={!movies.length}
           label="Clear all"
           style="tertiary"
           onClick={handleClearHistory}
@@ -55,11 +62,11 @@ const ViewHistory = () => {
       >
         {movies.map((movie, index) => (
           <div
-            key={`${movie.Title}-${index}`}
-            ref={el => (movieItemRefs.current[movie.Title] = el)}
+            key={`${movie.imdbID}-${index}`}
+            ref={el => (movieItemRefs.current[movie.imdbID] = el)}
             className={classNames(
               "flex items-center justify-between rounded-lg px-4 py-3 transition-colors",
-              movie === selectedMovie
+              movie.imdbID === latestMovie?.imdbID
                 ? "bg-blue-600 text-white"
                 : "bg-blue-100 text-black"
             )}
@@ -67,7 +74,7 @@ const ViewHistory = () => {
             <span>{movie.Title}</span>
             <Delete
               className="cursor-pointer"
-              onClick={() => removeMovie(movie.imdbID)}
+              onClick={() => handleRemoveMovie(movie.imdbID)}
             />
           </div>
         ))}
@@ -78,7 +85,7 @@ const ViewHistory = () => {
         isOpen={isClearAlertOpen}
         message="Are you sure you want to clear all history?"
         submitButtonLabel="Clear"
-        title="Clear view history"
+        title="Clear View History"
         onClose={() => setIsClearAlertOpen(false)}
         onSubmit={confirmClearHistory}
       />
