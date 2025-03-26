@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import useFavouriteMoviesStore from "stores/useFavouriteMoviesStore";
 import { setDefaultImage } from "utils/setDefaultImage";
 
-const MovieDetails = ({ id, isOpen, onClose }) => {
+const Details = ({ id, isOpen, onClose }) => {
   // const [isFavorited, setIsFavorited] = useState(false);
 
   const { addFavouriteMovie, removeFavouriteMovie, favouriteMovies } =
@@ -122,4 +122,4 @@ const MovieDetails = ({ id, isOpen, onClose }) => {
     </Modal>
   );
 };
-export default MovieDetails;
+export default Details;

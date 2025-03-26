@@ -6,9 +6,9 @@ import { Alert, Button } from "neetoui";
 import { useTranslation } from "react-i18next";
 import useViewHistoryStore from "stores/useViewHistoryStore";
 
-import EmptyPage from "./commons/EmptyPage";
+import EmptyPage from "../commons/EmptyPage";
 
-const ViewHistory = () => {
+const History = () => {
   const [isClearAlertOpen, setIsClearAlertOpen] = useState(false);
   const [latestMovie, setLatestMovie] = useState(null);
   const { t } = useTranslation();
@@ -85,7 +85,6 @@ const ViewHistory = () => {
           ))}
         </div>
       )}
-      ;
       <Alert
         cancelButtonLabel="Cancel"
         closeOnOutsideClick={false}
@@ -100,4 +99,4 @@ const ViewHistory = () => {
   );
 };
 
-export default ViewHistory;
+export default History;
